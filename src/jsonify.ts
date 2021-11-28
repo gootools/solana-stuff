@@ -6,27 +6,28 @@ export default ({
     stringifyNumbers = true,
     nullifyUndefined = true,
   } = {}) =>
-  (foo: any) => {
+  <T>(x: any): T => {
     const formatter = (x) => {
-      if (Array.isArray(x)) {
-        return x.map((y) => formatter(y));
-      } else if (stringifyBigNumbers && x instanceof BN) {
-        return x.toString();
-      } else if (x instanceof PublicKey) {
-        return x.toString();
-      } else if (typeof x === "object") {
-        return Object.entries(x).reduce((acc, [k, v]) => {
-          acc[k] = formatter(v);
-          return acc;
-        }, {});
-      } else if (stringifyNumbers && typeof x === "number") {
-        return String(x);
-      } else if (nullifyUndefined && x === undefined) {
-        return null;
-      } else {
-        return x;
-      }
+      try {
+        if (x === null || (nullifyUndefined && x === undefined)) {
+          return null;
+        } else if (Array.isArray(x)) {
+          return x.map((y) => formatter(y));
+        } else if (stringifyBigNumbers && x instanceof BN) {
+          return x.toString();
+        } else if (x instanceof PublicKey) {
+          return x.toString();
+        } else if (x && typeof x === "object") {
+          return Object.entries(x).reduce((acc, [k, v]) => {
+            acc[k] = formatter(v);
+            return acc;
+          }, {});
+        } else if (stringifyNumbers && typeof x === "number") {
+          return String(x);
+        }
+      } catch (err) {}
+      return x;
     };
 
-    return formatter(foo);
+    return formatter(x);
   };
