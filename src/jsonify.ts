@@ -13,17 +13,23 @@ export default ({
           return null;
         } else if (Array.isArray(x)) {
           return x.map((y) => formatter(y));
-        } else if (stringifyBigNumbers && (x instanceof BN || x._bn)) {
+        } else if (stringifyBigNumbers && x instanceof BN) {
           return x.toString(10);
         } else if (x instanceof PublicKey) {
           return x.toString();
         } else if (stringifyNumbers && typeof x === "number") {
           return String(x);
         } else if (x && typeof x === "object") {
-          return Object.entries(x).reduce((acc, [k, v]) => {
+          const ob = Object.entries(x).reduce((acc, [k, v]) => {
             acc[k] = formatter(v);
             return acc;
           }, {});
+
+          return Object.keys(ob).sort().join(",") ===
+            "length,negative,red,words"
+            ? // it's probably a BN.js
+              x.toString(10)
+            : ob;
         }
       } catch (err) {}
       return x;
