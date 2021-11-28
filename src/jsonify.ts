@@ -13,7 +13,7 @@ export default ({
           return null;
         } else if (Array.isArray(x)) {
           return x.map((y) => formatter(y));
-        } else if (stringifyBigNumbers && x instanceof BN) {
+        } else if (stringifyBigNumbers && (x instanceof BN || x._bn)) {
           return x.toString(10);
         } else if (x instanceof PublicKey) {
           return x.toString();
