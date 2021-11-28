@@ -4,12 +4,12 @@
   "type": "module",
   "source": "src/index.ts",
   "exports": {
-    "require": "./dist/index.cjs",
-    "default": "./dist/index.modern.js"
+    "require": "./lib/index.cjs",
+    "default": "./lib/index.modern.js"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.module.js",
-  "unpkg": "./dist/index.umd.js",
+  "main": "./lib/index.cjs",
+  "module": "./lib/index.module.js",
+  "unpkg": "./lib/index.umd.js",
   "scripts": {
     "test": "jest",
     "build": "microbundle --external @solana/web3.js,bn.js"
