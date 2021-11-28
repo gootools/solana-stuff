@@ -14,16 +14,16 @@ export default ({
         } else if (Array.isArray(x)) {
           return x.map((y) => formatter(y));
         } else if (stringifyBigNumbers && x instanceof BN) {
-          return x.toString();
+          return x.toString(10);
         } else if (x instanceof PublicKey) {
           return x.toString();
+        } else if (stringifyNumbers && typeof x === "number") {
+          return String(x);
         } else if (x && typeof x === "object") {
           return Object.entries(x).reduce((acc, [k, v]) => {
             acc[k] = formatter(v);
             return acc;
           }, {});
-        } else if (stringifyNumbers && typeof x === "number") {
-          return String(x);
         }
       } catch (err) {}
       return x;
