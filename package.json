@@ -1,0 +1,30 @@
+{
+  "name": "@gootools/solana-stuff",
+  "version": "0.0.1",
+  "type": "module",
+  "source": "src/index.ts",
+  "exports": {
+    "require": "./dist/index.cjs",
+    "default": "./dist/index.modern.js"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "scripts": {
+    "test": "jest",
+    "build": "microbundle --external @solana/web3.js,bn.js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@solana/web3.js": "^1.31.0",
+    "@types/jest": "^27.0.3",
+    "esbuild": "^0.14.0",
+    "esbuild-jest": "^0.5.0",
+    "jest": "^27.3.1",
+    "microbundle": "^0.14.2",
+    "typescript": "^4.5.2"
+  },
+  "peerDependencies": {
+    "@solana/web3.js": "^1.31.0"
+  }
+}
