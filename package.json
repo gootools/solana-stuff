@@ -41,7 +41,7 @@
     "bn.js": "^5"
   },
   "directories": {
-    "lib": "lib"
+    "dist": "dist"
   },
   "repository": {
     "type": "git",
