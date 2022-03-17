@@ -1,13 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { PublicKey } from "@solana/web3.js";
 import BN from "bn.js";
 
-export default ({
+export const jsonify =
+  ({
     stringifyBigNumbers = true,
     stringifyNumbers = true,
     nullifyUndefined = true,
   } = {}) =>
   <T>(x: any): T => {
-    const formatter = (x) => {
+    const formatter = (x: any): any => {
       try {
         if (x === null || (nullifyUndefined && x === undefined)) {
           return null;
@@ -23,7 +26,7 @@ export default ({
           const ob = Object.entries(x).reduce((acc, [k, v]) => {
             acc[k] = formatter(v);
             return acc;
-          }, {});
+          }, {} as any);
 
           return Object.keys(ob).sort().join(",") ===
             "length,negative,red,words"
@@ -31,7 +34,9 @@ export default ({
               x.toString(10)
             : ob;
         }
-      } catch (err) {}
+      } catch (err) {
+        console.error(err);
+      }
       return x;
     };
 

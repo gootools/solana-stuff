@@ -1,1 +1,2 @@
-export { default as jsonify } from "./jsonify";
+export { jsonify } from "./jsonify";
+export { tryFetching } from "./tryFetching";

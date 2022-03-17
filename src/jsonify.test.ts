@@ -1,6 +1,6 @@
 import { PublicKey } from "@solana/web3.js";
 import BN from "bn.js";
-import jsonify from "./jsonify";
+import { jsonify } from "./jsonify";
 
 const data = {
   StepAscQoEioFxxWGnh2sLBDFp9d8rvKz2Yp39iDpyT: {
