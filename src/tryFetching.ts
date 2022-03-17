@@ -6,7 +6,7 @@ export const tryFetching =
       "https://api.mainnet-beta.solana.com": 1,
     }
   ) =>
-  async <K>(payload: any): Promise<K> => {
+  async <K>(payload: any): Promise<{ result: K }> => {
     let endpoints = Object.entries(weightings).reduce(
       (acc: Array<string>, [url, weight]) => {
         for (let i = 0; i < weight; i++) {
