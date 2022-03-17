@@ -2,7 +2,7 @@
 
 export const tryFetching =
   (
-    weightings = {
+    weightings: Record<string, number> = {
       "https://api.mainnet-beta.solana.com": 1,
     }
   ) =>
