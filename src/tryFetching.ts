@@ -43,7 +43,7 @@ export const tryFetching =
 
         endpoints = endpoints.filter((u) => u !== url);
 
-        const data = await fetch(url, {
+        const requestPayload = {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -53,8 +53,13 @@ export const tryFetching =
             id: 1,
             ...payload,
           }),
-        });
+        };
+
+        debug({ url, requestPayload });
+
+        const data = await fetch(url, requestPayload);
         json = await data.json();
+        debug({ json });
         console.log(`success ${url}`);
       } catch (err) {
         console.error(`failed ${url}`);
@@ -67,3 +72,7 @@ export const tryFetching =
       return json;
     }
   };
+
+const debug = (...data: any) => {
+  if (process.env.DEBUG) console.debug(data);
+};
