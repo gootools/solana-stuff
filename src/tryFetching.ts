@@ -1,5 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+/**
+ * makes solana RPC requests, retries another provider on failure
+ * based on weighting preferences
+ * @param weightings key/value of object rpcUrl: weighting,
+ * higher weighting = more likely to get picked
+ * @returns rpc response object
+ * @example
+ * const rpcFetch = tryFetching({
+ *  // twice as likely to use public RPC endpoint
+ *  "https://api.mainnet-beta.solana.com": 2,
+ *  "https://ssc-dao.genesysgo.net": 1,
+ * })
+ * const { result } = rpcFetch({ "method": "getLatestBlockhash" })
+ */
 export const tryFetching =
   (
     weightings: Record<string, number> = {
